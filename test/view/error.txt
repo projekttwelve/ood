@@ -1,0 +1,4 @@
+/home/august/ood.sh: 6: /home/august/ood.sh: /home/august/repos/Java/objektorienteradDesign/test/view/ViewTest.java: Permission denied
+error: file not found: /home/august/repos/Java/objektorienteradDesign/retailstore/integration/Item.java
+Usage: javac <options> <source files>
+use --help for a list of possible options
