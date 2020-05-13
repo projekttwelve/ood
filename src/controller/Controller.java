@@ -6,14 +6,43 @@ import view.View;
 
 public class Controller{  
   private Sale sale;
+  private InventorySystem inventory;
 
 /**
  * Initialies the controller
  * @para sale is the sale associated with this controller
  */
 
-  public Controller(Sale sale){
-    this.sale = sale;
+  public Controller(){
+    this.sale = new Sale();
+    this.inventory = new InventorySystem();
+  }
+
+  public void addObserver(SaleObserver obs){
+    this.sale.addObserver(obs);
+  }
+
+  /**
+   * gets an item from the inventory
+   * @return returns the item with the given itemID
+   * @param itemID id of the item wanted
+   */
+
+  public Item getItem(int itemID){
+    try{
+      return inventory.getItem(itemID);
+    }catch(ItemIdDoesNotExistException e){
+      throw new ItemIdDoesNotExistException(String.format("Item with ID: itemID=%d does not exist", itemID));
+    }
+  }
+
+/**
+ * Gets the inventory
+ * @return this.inventory returns the inventory
+ */
+
+  public InventorySystem getInventory(){
+    return this.inventory;
   }
 
 /**
@@ -40,9 +69,8 @@ public class Controller{
    * and the VAT of the sale
    */
 
-  public void printTotalPriceAndVAT(){
-    System.out.println("Total Price: " + this.sale.getRunningTotal() + " VAT: 25%");
-    System.out.println();
+  public String printTotalPriceAndVAT(){
+   return "Total Price: " + this.sale.getRunningTotal() + " VAT: 25%";
   }
 
 /**

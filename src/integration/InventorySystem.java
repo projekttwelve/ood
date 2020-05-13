@@ -1,5 +1,6 @@
 package integration;
 import integration.Item;
+import integration.ItemIdDoesNotExistException;
 public class InventorySystem{
   private Item[] inventory = new Item[10];
 
@@ -17,12 +18,12 @@ public class InventorySystem{
  * @retur item represents the item to be returned
  */
   
-  public Item getItem(String itemName){
-    for(Item item : this.inventory){
-      if (item.getName() == itemName)
-        return item;
+  public Item getItem(int id){
+    try{
+      return this.inventory[id];
+    }catch(Exception e){
+      throw new ItemIdDoesNotExistException("array index out of bounds", e);
     }
-    return null;
   }
 
   private void addItems(){

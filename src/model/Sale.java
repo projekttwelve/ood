@@ -2,11 +2,14 @@ package model;
 import java.util.*;
 import integration.Item;
 import model.*;
+import model.SaleObserver;
 
 public class Sale{
   private int runningTotal;
   private int amountPaid;
   private Shoppingcart shoppingcart;
+  private List<SaleObserver> saleObserver = new ArrayList<>();
+
 
 /**
  * Creates a new instance, representing a new sale
@@ -16,6 +19,28 @@ public class Sale{
   public Sale(){
     this.shoppingcart = new Shoppingcart();
   }
+/**
+ * adds a unit that wants
+ * to observer this sale
+ * to a List
+ * @param obs observer to be added
+ */
+
+  public void addObserver(SaleObserver obs){
+    this.saleObserver.add(obs);  
+  }
+
+/*
+ * notifies the observer
+ * that the running total 
+ * has changed
+ */
+  private void notifyObservers(){
+    for (SaleObserver obs : saleObserver) {
+      obs.updateTotalAmount(this.runningTotal);
+    } 
+  } 
+
 
   private void presentCurrentItemAndSale(Item item){
     System.out.println(item.toString());
