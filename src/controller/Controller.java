@@ -10,13 +10,18 @@ public class Controller{
 
 /**
  * Initialies the controller
- * @para sale is the sale associated with this controller
+ * @param sale is the sale associated with this controller
  */
 
   public Controller(){
     this.sale = new Sale();
     this.inventory = new InventorySystem();
   }
+
+/**
+ * Adds an observer to the current sale
+ * @param obs the observer to be added
+ */
 
   public void addObserver(SaleObserver obs){
     this.sale.addObserver(obs);

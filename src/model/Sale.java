@@ -19,6 +19,7 @@ public class Sale{
   public Sale(){
     this.shoppingcart = new Shoppingcart();
   }
+
 /**
  * adds a unit that wants
  * to observer this sale
@@ -35,12 +36,17 @@ public class Sale{
  * that the running total 
  * has changed
  */
+
   private void notifyObservers(){
     for (SaleObserver obs : saleObserver) {
       obs.updateTotalAmount(this.runningTotal);
     } 
   } 
 
+/*
+ * Presents item and running total for this sale
+ * @param item current item to be resented
+ */
 
   private void presentCurrentItemAndSale(Item item){
     System.out.println(item.toString());

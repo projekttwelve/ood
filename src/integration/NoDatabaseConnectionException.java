@@ -1,7 +1,6 @@
 package integration;
 /**
  * Thrown when using getItem() method in the InventorySystem class when
- * trying to access an Item with a ID that does not exist.
  */
 
 public class NoDatabaseConnectionException extends RuntimeException{

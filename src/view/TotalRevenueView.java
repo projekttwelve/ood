@@ -6,7 +6,7 @@ public class TotalRevenueView implements SaleObserver{
 
 /**
   * updates the runningTotal
-  * @param the new total
+  * @param amount the new total
   */
 
   @Override
@@ -14,6 +14,10 @@ public class TotalRevenueView implements SaleObserver{
     this.runningTotal = amount;
     printCurrentState();
   }
+
+/**
+ * prints the running total of the current sale
+ */
   
   private void printCurrentState(){
     System.out.println("Running Total is: ");
