@@ -4,7 +4,7 @@ package integration;
  * trying to access an Item with a ID that does not exist.
  */
 
-public class ItemIdDoesNotExistException extends RuntimeException{
+public class ItemIdDoesNotExistException extends Exception{
 
 /**
   *  Creates a new instance representing the condition described in the specified message.

@@ -4,7 +4,7 @@ package integration;
  * trying to access an Item with a ID that does not exist.
  */
 
-public class NoDatabaseConnectionException extends Exception{
+public class NoDatabaseConnectionException extends RuntimeException{
 
 /**
   *  Creates a new instance representing the condition described in the specified message.

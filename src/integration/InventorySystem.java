@@ -18,12 +18,13 @@ public class InventorySystem{
  * @retur item represents the item to be returned
  */
   
-  public Item getItem(int id){
-    try{
-      return this.inventory[id];
-    }catch(Exception e){
-      throw new ItemIdDoesNotExistException("array index out of bounds", e);
-    }
+  public Item getItem(int id) throws NoDatabaseConnectionException, ItemIdDoesNotExistException{
+    int dataBaseConnectionFail = 503;
+    if (id == dataBaseConnectionFail)
+      throw new NoDatabaseConnectionException("could not connect to server with ip: 11.133.333.33");
+    else if( id < 0 || id > inventory.length)
+      throw new ItemIdDoesNotExistException("array index out of bounds");
+    return this.inventory[id];
   }
 
   private void addItems(){

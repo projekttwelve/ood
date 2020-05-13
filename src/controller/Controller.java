@@ -28,11 +28,21 @@ public class Controller{
    * @param itemID id of the item wanted
    */
 
-  public Item getItem(int itemID){
+  public Item getItem(int itemID) throws NoDatabaseConnectionException, ItemIdDoesNotExistException{
     try{
       return inventory.getItem(itemID);
-    }catch(ItemIdDoesNotExistException e){
-      throw new ItemIdDoesNotExistException(String.format("Item with ID: itemID=%d does not exist", itemID));
+    }catch(NoDatabaseConnectionException e){
+      System.out.println("\nINTENDED FOR THE LOG");
+      System.out.println("----------------------------");
+      System.out.println(e);
+      System.out.println("----------------------------\n");
+      throw new NoDatabaseConnectionException("Could not connect to our inventory system!\n");
+    }catch(Exception e){
+      System.out.println("\nINTENDED FOR THE LOG");
+      System.out.println("----------------------------");
+      System.out.println(e);
+      System.out.println("----------------------------\n");
+      throw new ItemIdDoesNotExistException(String.format("Item with ID: itemID=%d does not exist\n", itemID));
     }
   }
 

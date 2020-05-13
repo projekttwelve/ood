@@ -24,22 +24,35 @@ public class View {
   public void test(){
     System.out.println("Welcome");
     InventorySystem inventory = this.controller.getInventory();
-    int milk = 0; 
-    int pineapple = 1;
+    int itemIdThatDoesNotExist = 500; 
+    int itemIdThatResultsInDatabaseConnectionError = 503;
     int cheese = 2; 
     int ham = 3; 
     
     try{
-      Item Milk = this.controller.getItem(500);
-      Item Pineapple = this.controller.getItem(pineapple);
+      Item Milk = this.controller.getItem(itemIdThatDoesNotExist);
+    }catch(ItemIdDoesNotExistException e){
+      System.out.println(e);
+    }catch(NoDatabaseConnectionException e){
+      System.out.println(e);
+    }
+
+    try{
+      Item Pineapple = this.controller.getItem(itemIdThatResultsInDatabaseConnectionError);
+    }catch(ItemIdDoesNotExistException e){
+      System.out.println(e);
+    }catch(NoDatabaseConnectionException e){
+      System.out.println(e);
+    }
+
+    try{
       Item Cheese = this.controller.getItem(cheese);
       Item Ham = this.controller.getItem(ham);
-  
-      this.controller.registerItem(Milk);
-      this.controller.registerItem(Pineapple);
       this.controller.registerItem(Cheese);
       this.controller.registerItem(Ham);
     }catch(ItemIdDoesNotExistException e){
+      System.out.println(e);
+    }catch(NoDatabaseConnectionException e){
       System.out.println(e);
     }
 

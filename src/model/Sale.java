@@ -59,6 +59,7 @@ public class Sale{
   public void registerItem(Item item){
     this.shoppingcart.addToShoppingCart(item);
     runningTotal = runningTotal + item.getPrice();
+    notifyObservers();
     presentCurrentItemAndSale(item);
   }
 
