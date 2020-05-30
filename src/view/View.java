@@ -32,17 +32,17 @@ public class View {
     try{
       Item Milk = this.controller.getItem(itemIdThatDoesNotExist);
     }catch(ItemIdDoesNotExistException e){
-      System.out.println(e);
+      System.out.println("Item with that id does not exist");
     }catch(NoDatabaseConnectionException e){
-      System.out.println(e);
+      System.out.println("Can't connect to our system, please try again\n");
     }
 
     try{
       Item Pineapple = this.controller.getItem(itemIdThatResultsInDatabaseConnectionError);
     }catch(ItemIdDoesNotExistException e){
-      System.out.println(e);
+      System.out.println("Item with that id does not exist");
     }catch(NoDatabaseConnectionException e){
-      System.out.println(e);
+      System.out.println("Can't connect to database");
     }
 
     try{
@@ -51,9 +51,9 @@ public class View {
       this.controller.registerItem(Cheese);
       this.controller.registerItem(Ham);
     }catch(ItemIdDoesNotExistException e){
-      System.out.println(e);
+      System.out.println("Item with that id does not exist");
     }catch(NoDatabaseConnectionException e){
-      System.out.println(e);
+      System.out.println("Can't connect to database");
     }
 
       System.out.println("Do you wish to shop more? yes/no");

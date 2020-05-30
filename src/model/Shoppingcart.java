@@ -33,7 +33,7 @@ public class Shoppingcart{
   }
 
     /** 
-     * @retur this.firstItemInCart returns the first item in the shoppingcart
+     * @return this.firstItemInCart returns the first item in the shoppingcart
      */
 
   public ItemInShoppingCart getFirstItem(){
@@ -50,7 +50,7 @@ public class Shoppingcart{
      * the item being added exits it increments 
      * the quantity and returns. 
      * If it does not exit it adds it to the shoppingcart
-     * @para item to be added.
+     * @param item to be added.
      */
 
   public void addToShoppingCart(Item item){

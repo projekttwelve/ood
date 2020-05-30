@@ -11,6 +11,6 @@ public interface SaleObserver{
    * Invoked when runningTotal has changed
    * @param amount new running total
    */
-  void updateTotalAmount(int amount);
+  void updateTotalAmount(double amount);
 
 }

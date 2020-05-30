@@ -1,4 +1,5 @@
-package inventory;
+package integration;
+
 import model.*;
 import integration.*;
 import view.View;
@@ -9,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 class InventorySystemTest{
+
   InventorySystem inventory;
 
     @BeforeEach
     void setUp() {
-      this.inventory = new InventorySystem();
+      this.inventory = InventorySystem.getInventory();
     }
 
     @AfterEach
@@ -24,11 +25,11 @@ class InventorySystemTest{
     }
 
   @Test
-  public void registerItem(){
-    int cheese = 2; 
-    Item hopefully_cheese = this.inventory.getItem(cheese);
+  public void registerItem() throws ItemIdDoesNotExistException, NoDatabaseConnectionException{
+    int cheeseID = 2;
+    Item hopefully_cheese = this.inventory.getItem(cheeseID);
     Item cheese = new Item(25, 30, 2, "Cheese");
-    assertTrue(hopefully_cheese.contains(cheese), "wrong");
+    assertEquals(hopefully_cheese, cheese);
   }
 
     @Test
@@ -37,17 +38,17 @@ class InventorySystemTest{
       try {
         this.inventory.getItem(itemID);
       }catch(ItemIdDoesNotExistException e){
-      assertTrue(e.getMessage().contains("Item with ID: 123213 does not exist\n");
+      assertTrue(e.getMessage().contains("Item with ID: 123213 does not exist\n"));
       }
     }
 
   @Test
-  void NoDatabaseConnectionRegisterItem(){
+  void NoDatabaseConnectionRegisterItem()throws ItemIdDoesNotExistException, NoDatabaseConnectionException{
     int itemID = 503;
     try{
-      this.Inventory.getItem(itemID);
+      this.inventory.getItem(itemID);
     }catch (NoDatabaseConnectionException e) {
-      assertTrue(e.getMessage().contains("Could not connect to our inventory system!\n");
+      assertTrue(e.getMessage().contains("Could not connect to our inventory system!\n"));
     }
 
   }

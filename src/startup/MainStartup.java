@@ -10,7 +10,7 @@ public class MainStartup {
  * creates an Sale, controller and view 
  * and runs a test-simulation of the system
  */
-  public static void main(String[] args) throws ItemIdDoesNotExistException {
+  public static void main(String[] args) {
     Controller controller = new Controller();
     View view = new View(controller);
     view.test();

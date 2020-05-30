@@ -1,11 +1,9 @@
 package model;
 import java.util.*;
 import integration.Item;
-import model.*;
-import model.SaleObserver;
 
 public class Sale{
-  private int runningTotal;
+  private double runningTotal;
   private int amountPaid;
   private Shoppingcart shoppingcart;
   private List<SaleObserver> saleObserver = new ArrayList<>();
@@ -63,8 +61,19 @@ public class Sale{
  *@ param item to be added
  */
   public void registerItem(Item item){
+    Context context;
     this.shoppingcart.addToShoppingCart(item);
-    runningTotal = runningTotal + item.getPrice();
+
+    if (item.getPrice() > 90){
+      context = new Context(new DiscountOne());
+      runningTotal = runningTotal + item.getPrice()*context.executeDiscount();
+    }
+    else if (item.getPrice() > 80){
+      context = new Context(new DiscountTwo());
+      runningTotal = runningTotal + item.getPrice()*context.executeDiscount();
+    }
+    else
+      runningTotal = runningTotal + item.getPrice();
     notifyObservers();
     presentCurrentItemAndSale(item);
   }
@@ -73,7 +82,7 @@ public class Sale{
  * Gets the total price of the sale. 
  *@ return this.runningTotal is the running total price of the sale
  */
-  public int getRunningTotal(){
+  public double getRunningTotal(){
     return this.runningTotal; 
   }
 
@@ -96,4 +105,7 @@ public class Sale{
     this.amountPaid = amountPaid;
   }
 
+  public int getAmountPaid(){
+    return this.amountPaid;
+  }
 }

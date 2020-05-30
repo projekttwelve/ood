@@ -7,15 +7,15 @@ import view.View;
 public class Controller{  
   private Sale sale;
   private InventorySystem inventory;
+  private Printer printer;
 
 /**
  * Initialies the controller
- * @param sale is the sale associated with this controller
  */
 
   public Controller(){
     this.sale = new Sale();
-    this.inventory = new InventorySystem();
+    this.inventory = InventorySystem.getInventory();
   }
 
 /**
@@ -39,13 +39,13 @@ public class Controller{
     }catch(NoDatabaseConnectionException e){
       System.out.println("\nINTENDED FOR THE LOG");
       System.out.println("----------------------------");
-      System.out.println(e);
+      System.out.println(e.getMessage());
       System.out.println("----------------------------\n");
       throw new NoDatabaseConnectionException("Could not connect to our inventory system!\n");
     }catch(Exception e){
       System.out.println("\nINTENDED FOR THE LOG");
       System.out.println("----------------------------");
-      System.out.println(e);
+      System.out.println(e.getMessage());
       System.out.println("----------------------------\n");
       throw new ItemIdDoesNotExistException(String.format("Item with ID: itemID=%d does not exist\n", itemID));
     }
@@ -75,8 +75,9 @@ public class Controller{
  */
   
   public void printReceipt(){
-    Receipt receipt = this.sale.getReceipt(); 
-    receipt.printReceipt(); 
+    Receipt receipt = this.sale.getReceipt();
+    this.printer = new Printer(receipt);
+    this.printer.printReceipt();
   }
 
   /*

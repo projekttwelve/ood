@@ -2,7 +2,7 @@ package view;
 import model.SaleObserver;
 
 public class TotalRevenueView implements SaleObserver{
-  private int runningTotal;
+  private double runningTotal;
 
 /**
   * updates the runningTotal
@@ -10,7 +10,7 @@ public class TotalRevenueView implements SaleObserver{
   */
 
   @Override
-  public void updateTotalAmount(int amount){
+  public void updateTotalAmount(double amount){
     this.runningTotal = amount;
     printCurrentState();
   }

@@ -11,42 +11,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ControllerTest{  
   Controller controller;
-
-  @beforeEach
+  @BeforeEach
   public void setUp(){
     this.controller = new Controller();
   }
 
   @AfterEach
   public void tearDown(){
-    contr = null;
+    controller = null;
   }
 
   @Test
-  public void registerItem(){
-    int cheese = 2; 
-    Item hopefully_cheese = this.controller.getItem(cheese);
+  public void registerItem()throws ItemIdDoesNotExistException, NoDatabaseConnectionException{
+    int cheeseID = 2;
+    Item hopefully_cheese = this.controller.getItem(cheeseID);
     Item cheese = new Item(25, 30, 2, "Cheese");
-    assertTrue(hopefully_cheese.contains(cheese), "wrong");
-  }
-
+    assertEquals(hopefully_cheese, cheese);
+}
   @Test
   void idDoesNotExist(){
     int itemID = 123213;
     try {
       this.controller.getItem(itemID);
     }catch(ItemIdDoesNotExistException e){
-    assertTrue(e.getMessage().contains("Item with ID: 123213 does not exist\n");
+      assertTrue(e.getMessage().contains("Item with ID: 123213 does not exist\n"));
     }
   }
 
   @Test
-  void NoDatabaseConnectionRegisterItem(){
+  void NoDatabaseConnectionRegisterItem()throws ItemIdDoesNotExistException, NoDatabaseConnectionException{
     int itemID = 503;
     try{
       this.controller.getItem(itemID);
     }catch (NoDatabaseConnectionException e) {
-      assertTrue(e.getMessage().contains("Could not connect to our inventory system!\n");
+      assertTrue(e.getMessage().contains("Could not connect to our inventory system!\n"));
     }
   }
+
 }
